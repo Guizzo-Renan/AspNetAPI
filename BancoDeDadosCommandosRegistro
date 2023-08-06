@@ -1,0 +1,40 @@
+CREATE TABLE Produtos
+(
+    Id INT PRIMARY KEY IDENTITY,
+    Nome NVARCHAR(100) NOT NULL,
+    Descricao NVARCHAR(500) NOT NULL,
+    Preco DECIMAL(10, 2) NOT NULL,
+    Promocao BIT NOT NULL,
+    ImagemURL NVARCHAR(500) NULL,
+    TipoProduto NVARCHAR(50) NULL
+);
+
+CREATE TABLE Usuarios
+(
+    Id INT PRIMARY KEY IDENTITY,
+    Nome NVARCHAR(100) NOT NULL,
+    Senha NVARCHAR(100) NOT NULL,
+    CEP NVARCHAR(10) NULL,
+    Cidade NVARCHAR(100) NULL
+);
+
+CREATE TABLE ProdutosAuxiliares
+(
+    Id INT PRIMARY KEY IDENTITY,
+    ProdutoId INT NOT NULL,
+    ImagemUrl1 NVARCHAR(500) NULL,
+    ImagemUrl2 NVARCHAR(500) NULL,
+    ImagemUrl3 NVARCHAR(500) NULL,
+    Nota FLOAT NOT NULL,
+    IdComentarios INT NOT NULL,
+    CONSTRAINT FK_ProdutoAuxiliar_Produto FOREIGN KEY (ProdutoId) REFERENCES Produtos (Id)
+);
+
+
+CREATE TABLE Especificacoes
+(
+    Id INT PRIMARY KEY IDENTITY,
+    ProdutoId INT NOT NULL,
+    Detalhes NVARCHAR(500) NOT NULL,
+    CONSTRAINT FK_Especificacao_Produto FOREIGN KEY (ProdutoId) REFERENCES Produtos (Id)
+);
